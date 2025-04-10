@@ -26,7 +26,7 @@ func TestSmoke(t *testing.T) {
 
 	// website::tag::3:: Run the Docker image.
 	opts := &docker.RunOptions{
-		Command:    []string{"-c", "ls", "/"},
+		Command:    []string{"-c", "ls", "/opt"},
 		Entrypoint: "sh",
 	}
 	output := docker.Run(t, tag, opts)
