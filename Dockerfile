@@ -19,12 +19,13 @@ RUN apt update \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 WORKDIR /opt
-RUN bun i @modelcontextprotocol/inspector@$VERSION
+RUN bun add @modelcontextprotocol/inspector@$VERSION
 
 # run the app
+ARG SERVER_PORT=6277
 EXPOSE 6274
-EXPOSE 6277
+EXPOSE ${SERVER_PORT}
 
-HEALTHCHECK --interval=30s --timeout=5s CMD bash -c ':> /dev/tcp/127.0.0.1/6277' || exit 1
+HEALTHCHECK --interval=10s --timeout=3s CMD bash -c ":> /dev/tcp/127.0.0.1/${SERVER_PORT}" || /opt/node_modules/.bin/mcp-inspector
 
 ENTRYPOINT ["/opt/node_modules/.bin/mcp-inspector"]
