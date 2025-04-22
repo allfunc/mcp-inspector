@@ -10,6 +10,7 @@ VERSION=$(${DIR}/support/VERSION.sh)
 
 build() {
   DOCKER_BUILDKIT=1 docker build --progress=plain \
+    --no-cache \
     --build-arg VERSION=$VERSION \
     -t $IMAGE_NAME .
 }
