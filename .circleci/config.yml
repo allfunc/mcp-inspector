@@ -103,6 +103,7 @@ jobs:
             docker buildx build ${BUILD_ARG} -f ${BUILD_FOLDER}/Dockerfile \
               --cache-to=type=inline,mode=all \
               --cache-from $IMAGE_NAME:${BUILD_VERSION} \
+              --no-cache \
               --push \
               --progress=plain \
               --platform linux/amd64,linux/arm64/v8 \
@@ -122,4 +123,4 @@ workflows:
             - test
           matrix:
             parameters:
-              docker-tag: ["0.10.2"]
+              docker-tag: ["0.14.0"]

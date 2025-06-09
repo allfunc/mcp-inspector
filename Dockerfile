@@ -29,4 +29,11 @@ EXPOSE ${SERVER_PORT}
 HEALTHCHECK --interval=10s --timeout=3s CMD bash -c ":> /dev/tcp/127.0.0.1/${SERVER_PORT}" || /opt/node_modules/.bin/mcp-inspector
 
 RUN echo '{"mcpServers": {"mcp-test": {}}}' > /opt/mcp-config.json
-ENTRYPOINT ["bun", "/opt/node_modules/.bin/mcp-inspector", "--config", "/opt/mcp-config.json", "--server", "mcp-test"]
+ENTRYPOINT [ \
+  "bun", \
+  "/opt/node_modules/.bin/mcp-inspector", \
+  "--config", \
+  "/opt/mcp-config.json", \
+  "--server", \
+  "mcp-test" \
+  ]
